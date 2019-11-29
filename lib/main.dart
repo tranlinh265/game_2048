@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:game_2048/game_data.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,13 +29,13 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+    
   }
 
   @override
   Widget build(BuildContext context) {
+    
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
