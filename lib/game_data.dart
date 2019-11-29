@@ -114,6 +114,10 @@ class GameData {
     input = rotateTable(input, flick);
     output = caculateTable(input);
     output = rotateTable(output, flick, true);
+    if( input != output){
+      output = addNewValue(output);
+    }
+    
 
     return output;
   }
