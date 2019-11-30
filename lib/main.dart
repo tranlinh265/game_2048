@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:game_2048/game.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_2048/bloc/bloc.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +14,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: GameScreen(),
+      home: BlocProvider(
+        create: (context) => FlickBloc(),
+        child: GameScreen(),
+      ),
     );
   }
 }

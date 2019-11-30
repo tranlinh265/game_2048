@@ -1,5 +1,6 @@
 import 'package:game_2048/game_data.dart';
 import 'package:test/test.dart';
+import 'package:game_2048/bloc/flick_event.dart';
 
 void main() {
   test('test caculate result on one row', () {

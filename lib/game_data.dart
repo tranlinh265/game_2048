@@ -1,11 +1,5 @@
 import 'dart:math';
-
-enum Flick {
-  leftToRight,
-  rightToLeft,
-  topToBtm,
-  btmToTop,
-}
+import 'bloc/flick_event.dart';
 
 class GameData {
   List<List<int>> createEmptyList([int size = 4]) {
@@ -114,10 +108,9 @@ class GameData {
     input = rotateTable(input, flick);
     output = caculateTable(input);
     output = rotateTable(output, flick, true);
-    if( input != output){
+    if (input != output) {
       output = addNewValue(output);
     }
-    
 
     return output;
   }
@@ -134,18 +127,20 @@ class GameData {
     return positionList;
   }
 
-  bool isGameOver(List<List<int>> input){
+  bool isGameOver(List<List<int>> input) {
     return getEmptyPosition(input).isEmpty;
   }
 
-  List<List<int>> addNewValue(List<List<int>> input, [List<List<int>> emptyPositionList, int value = 2]){
-    if(emptyPositionList == null){
+  List<List<int>> addNewValue(List<List<int>> input,
+      [List<List<int>> emptyPositionList, int value = 2]) {
+    if (emptyPositionList == null) {
       emptyPositionList = getEmptyPosition(input);
     }
 
-    if(emptyPositionList.isNotEmpty){
+    if (emptyPositionList.isNotEmpty) {
       var ran = new Random();
-      List<int> position = emptyPositionList[ran.nextInt(emptyPositionList.length -1)];
+      List<int> position =
+          emptyPositionList[ran.nextInt(emptyPositionList.length - 1)];
       input[position[0]][position[1]] = value;
     }
 
