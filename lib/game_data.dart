@@ -2,10 +2,23 @@ import 'dart:math';
 import 'bloc/flick_event.dart';
 
 class GameData {
-  List<List<int>> createEmptyList([int size = 4]) {
+  static const arraySize = 4;
+
+  List<List<int>> createEmptyList([int size = arraySize]) {
     return List.generate(size, (_) => List.filled(size, 0));
   }
 
+  List<List<int>> randomNewList([int size = arraySize]) {
+    List<List<int>> output = createEmptyList(size);
+
+    var ran = Random();
+    var i = ran.nextInt(size -1);
+    var j = ran.nextInt(size -1);
+
+    output[i][j] = 2;
+
+    return output;
+  }
   List<int> removeValueZeroInside(List<int> input) {
     List<int> arr = List.filled(input.length, 0);
     var position = arr.length - 1;

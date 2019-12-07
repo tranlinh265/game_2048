@@ -4,17 +4,11 @@ import 'package:game_2048/game_data.dart';
 import './bloc.dart';
 
 class FlickBloc extends Bloc<FlickEvent, GameState> {
-  List<List<int>> _data = [
-    [0, 0, 0, 2],
-    [0, 0, 2, 0],
-    [0, 0, 0, 0],
-    [2, 0, 0, 0]
-  ];
-
+  
   GameData _gameData = new GameData();
 
   @override
-  GameState get initialState => ReadyState(data: _data);
+  GameState get initialState => ReadyState(data: _gameData.randomNewList());
 
   @override
   Stream<GameState> mapEventToState(

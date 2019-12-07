@@ -14,10 +14,25 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BlocProvider(
-        create: (context) => FlickBloc(),
-        child: GameScreen(),
+      home: Scaffold(
+        backgroundColor: Colors.green,
+        appBar: EmptyAppBar(),
+        body: BlocProvider(
+          create: (context) => FlickBloc(),
+          child: GameScreen(),
+        ),
       ),
     );
   }
+}
+
+class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+
+  @override
+  Size get preferredSize => Size(0.0,0.0);
+
 }
