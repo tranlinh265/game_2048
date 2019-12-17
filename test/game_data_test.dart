@@ -6,23 +6,23 @@ void main() {
   test('test caculate result on one row', () {
     final gamedata = GameData();
 
-    expect(gamedata.caculateRow([2, 2, 4, 2]), [0, 4, 4, 2]);
-    expect(gamedata.caculateRow([0, 0, 0, 2]), [0, 0, 0, 2]);
-    expect(gamedata.caculateRow([2, 4, 8, 16]), [2, 4, 8, 16]);
-    expect(gamedata.caculateRow([0, 2, 2, 0]), [0, 0, 0, 4]);
-    expect(gamedata.caculateRow([8, 2, 0, 0]), [0, 0, 8, 2]);
+    expect(gamedata.combineOneRow([2, 2, 4, 2]), [0, 4, 4, 2]);
+    expect(gamedata.combineOneRow([0, 0, 0, 2]), [0, 0, 0, 2]);
+    expect(gamedata.combineOneRow([2, 4, 8, 16]), [2, 4, 8, 16]);
+    expect(gamedata.combineOneRow([0, 2, 2, 0]), [0, 0, 0, 4]);
+    expect(gamedata.combineOneRow([8, 2, 0, 0]), [0, 0, 8, 2]);
   });
 
   test('caculate result on table', () {
     final gamedata = GameData();
 
     expect(
-        gamedata.caculateTable([
+        gamedata.combine([
           [2, 2, 4, 2],
           [0, 0, 0, 2],
           [2, 4, 8, 16],
           [8, 2, 0, 0]
-        ]),
+        ], Flick.leftToRight),
         [
           [0, 4, 4, 2],
           [0, 0, 0, 2],
@@ -129,7 +129,7 @@ void main() {
     final gameData = GameData();
 
     expect(
-        gameData.caculateTableBaseOnFlick([
+        gameData.combine([
           [2, 2, 4, 2],
           [0, 0, 0, 2],
           [2, 4, 8, 16],
@@ -147,7 +147,7 @@ void main() {
     final gameData = GameData();
 
     expect(
-        gameData.caculateTableBaseOnFlick([
+        gameData.combine([
           [2, 2, 4, 2],
           [0, 0, 0, 2],
           [2, 4, 8, 16],
@@ -165,7 +165,7 @@ void main() {
     final gameData = GameData();
 
     expect(
-        gameData.caculateTableBaseOnFlick([
+        gameData.combine([
           [2, 2, 4, 2],
           [0, 0, 0, 2],
           [2, 4, 8, 16],
@@ -188,16 +188,28 @@ void main() {
           [0, 0, 0, 2],
           [2, 4, 8, 16],
           [8, 2, 0, 0]
-        ]),
+        ],[
+            [0, 4, 4, 2],
+            [0, 0, 0, 2],
+            [2, 4, 8, 16],
+            [0, 0, 8, 2]
+        ]
+            ,Flick.leftToRight),
         false);
 
     expect(
         gameData.isGameOver([
-          [2, 2, 4, 2],
-          [2, 4, 8, 2],
           [2, 4, 8, 16],
-          [8, 2, 2, 2]
-        ]),
+          [16, 8, 4, 2],
+          [2, 4, 8, 16],
+          [16, 8, 4, 2]
+        ],[
+            [2, 4, 8, 16],
+            [16, 8, 4, 2],
+            [2, 4, 8, 16],
+            [16, 8, 4, 2]
+        ], Flick.leftToRight
+        ),
         true);
   });
 }

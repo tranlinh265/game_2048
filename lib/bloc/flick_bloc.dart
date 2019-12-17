@@ -27,7 +27,14 @@ class FlickBloc extends Bloc<FlickEvent, GameState> {
 
   Stream<GameState> mapFlickEventToState(Flick flick) async* {
     var data = state.props[0];
-    data = _gameData.caculateTableBaseOnFlick(data, flick);
+    data = _gameData.combine(data, flick);
+
+    if(_gameData.isGameOver(data, state.props[0], flick)){
+      yield GameOverState(data: data);
+    }
+
+    data = _gameData.addNewValue(state.props[0], data);
+
     yield ReadyState(data: data);
   }
 }
