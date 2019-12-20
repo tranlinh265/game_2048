@@ -8,6 +8,7 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width - 48;
+	bool _idDraging = false;
 
     return Container(
       margin: EdgeInsets.all(24.0),
@@ -31,25 +32,51 @@ class GameScreen extends StatelessWidget {
               ])
             ],
           ),
-          Expanded(
+          Container(
             child: GestureDetector(
-              onHorizontalDragEnd: (DragEndDetails details) {
-                if (details.primaryVelocity > 0) {
-                  print("left to right");
-                  BlocProvider.of<FlickBloc>(context).add(FlickLeftToRight());
-                } else if (details.primaryVelocity < 0) {
-                  print("right to left");
-                  BlocProvider.of<FlickBloc>(context).add(FlickRightToLeft());
+              behavior: HitTestBehavior.opaque,
+              onHorizontalDragUpdate: (details) {
+                if (!_idDraging) {
+                  _idDraging = true;
+                  if (details.primaryDelta > 0) {
+                    print("left to right");
+                    BlocProvider.of<FlickBloc>(context).add(FlickLeftToRight());
+                  } else  {
+                    print("right to left");
+                    BlocProvider.of<FlickBloc>(context).add(FlickRightToLeft());
+                  }
+                }
+                
+              },
+              onHorizontalDragCancel: (){
+                _idDraging = false;
+              },
+              onHorizontalDragDown: (detail) {
+                _idDraging = false;
+              },
+              onHorizontalDragEnd: (details) {
+                _idDraging = false;
+              },
+              onVerticalDragUpdate: (detail) {
+                if (!_idDraging) {
+					_idDraging = true;
+					if (detail.primaryDelta > 0) {
+						print("top to btm");
+						BlocProvider.of<FlickBloc>(context).add(FlickTopToBottm());
+					} else {
+						print("btm to top");
+						BlocProvider.of<FlickBloc>(context).add(FlickBottomToTop());
+					}
                 }
               },
+              onVerticalDragCancel: (){
+                _idDraging = false;
+              },
+              onVerticalDragDown: (detail) {
+                _idDraging = false;
+              },
               onVerticalDragEnd: (details) {
-                if (details.primaryVelocity > 0) {
-                  print("top to btm");
-                  BlocProvider.of<FlickBloc>(context).add(FlickTopToBottm());
-                } else if (details.primaryVelocity < 0) {
-                  print("btm to top");
-                  BlocProvider.of<FlickBloc>(context).add(FlickBottomToTop());
-                }
+                _idDraging = false;
               },
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -68,7 +95,8 @@ class GameScreen extends StatelessWidget {
                           crossAxisCount: 4,
                           crossAxisSpacing: 5.0,
                           mainAxisSpacing: 5.0,
-                          physics: NeverScrollableScrollPhysics(),
+                          primary: false,
+                          // physics: NeverScrollableScrollPhysics(),
                           children: List.generate(16, (index) {
                             int value =
                                 state.data[(index / 4).truncate().toInt()]
