@@ -2,25 +2,18 @@ import 'package:equatable/equatable.dart';
 import "package:meta/meta.dart";
 
 abstract class GameState extends Equatable {
-  const GameState();
+  final List<List<int>> data;
+
+  const GameState({this.data});
 
   @override
-  List<Object> get props => null;
+  List<Object> get props => [this.data];
 }
 
 class GameOverState extends GameState {
-  final List<List<int>> data;
-
-  const GameOverState({@required this.data});
-  @override
-  List<Object> get props => [this.data];
+  const GameOverState({@required data}) : super(data : data);
 }
 
 class ReadyState extends GameState {
-  final List<List<int>> data;
-
-  const ReadyState({@required this.data});
-
-  @override
-  List<Object> get props => [this.data];
+  const ReadyState({@required data}) : super(data: data);
 }
