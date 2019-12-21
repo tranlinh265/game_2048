@@ -31,6 +31,7 @@ class FlickBloc extends Bloc<FlickEvent, GameState> {
 
     if(_gameData.isGameOver(combinedData, data, flick)){
       yield GameOverState(data: combinedData);
+      return;
     }
 
     combinedData = _gameData.addNewValue(data, combinedData);
