@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:game_2048/game.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_2048/bloc/bloc.dart';
+import 'package:game_2048/app_bloc_delegate.dart';
+import 'package:bloc/bloc.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  BlocSupervisor.delegate = AppBlocDelegate();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -33,6 +38,5 @@ class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(0.0,0.0);
-
+  Size get preferredSize => Size(0.0, 0.0);
 }
