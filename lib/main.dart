@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.green,
         appBar: EmptyAppBar(),
         body: BlocProvider(
-          create: (context) => FlickBloc(),
+          create: (context) => GameBloc(),
           child: GameScreen(),
         ),
       ),

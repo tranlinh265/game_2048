@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:game_2048/game_data.dart';
+import 'package:game_2048/game_data_calculator.dart';
 import './bloc.dart';
 
-class FlickBloc extends Bloc<FlickEvent, GameState> {
+class GameBloc extends Bloc<GameEvent, GameState> {
   
-  GameData _gameData = new GameData();
+  GameDataCalculator _gameDataCalculator = new GameDataCalculator();
 
   @override
-  GameState get initialState => ReadyState(data: _gameData.randomNewList());
+  GameState get initialState => ReadyState(data: _gameDataCalculator.randomNewList());
 
   @override
   Stream<GameState> mapEventToState(
-    FlickEvent event,
+    GameEvent event,
   ) async* {
     if (event is FlickLeftToRight) {
       yield* mapFlickEventToState(Flick.leftToRight);
@@ -27,14 +27,14 @@ class FlickBloc extends Bloc<FlickEvent, GameState> {
 
   Stream<GameState> mapFlickEventToState(Flick flick) async* {
     var data = state.data;
-    var combinedData = _gameData.combine(data, flick);
+    var combinedData = _gameDataCalculator.combine(data, flick);
 
-    if(_gameData.isGameOver(combinedData, data, flick)){
+    if(_gameDataCalculator.isGameOver(combinedData, data, flick)){
       yield GameOverState(data: combinedData);
       return;
     }
 
-    combinedData = _gameData.addNewValue(data, combinedData);
+    combinedData = _gameDataCalculator.addNewValue(data, combinedData);
 
     yield ReadyState(data: combinedData);
   }

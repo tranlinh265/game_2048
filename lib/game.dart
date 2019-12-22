@@ -40,10 +40,10 @@ class GameScreen extends StatelessWidget {
                   _isDraging = true;
                   if (details.primaryDelta > 0) {
                     print("left to right");
-                    BlocProvider.of<FlickBloc>(context).add(FlickLeftToRight());
+                    BlocProvider.of<GameBloc>(context).add(FlickLeftToRight());
                   } else {
                     print("right to left");
-                    BlocProvider.of<FlickBloc>(context).add(FlickRightToLeft());
+                    BlocProvider.of<GameBloc>(context).add(FlickRightToLeft());
                   }
                 }
               },
@@ -61,10 +61,10 @@ class GameScreen extends StatelessWidget {
                   _isDraging = true;
                   if (detail.primaryDelta > 0) {
                     print("top to btm");
-                    BlocProvider.of<FlickBloc>(context).add(FlickTopToBottm());
+                    BlocProvider.of<GameBloc>(context).add(FlickTopToBottm());
                   } else {
                     print("btm to top");
-                    BlocProvider.of<FlickBloc>(context).add(FlickBottomToTop());
+                    BlocProvider.of<GameBloc>(context).add(FlickBottomToTop());
                   }
                 }
               },
@@ -86,7 +86,7 @@ class GameScreen extends StatelessWidget {
                   ),
                   width: _width,
                   height: _width,
-                  child: BlocBuilder<FlickBloc, GameState>(
+                  child: BlocBuilder<GameBloc, GameState>(
                     builder: (context, state) {
                       if (state is ReadyState) {
                         return GridView.count(

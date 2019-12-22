@@ -1,10 +1,10 @@
-import 'package:game_2048/game_data.dart';
+import 'package:game_2048/game_data_calculator.dart';
 import 'package:test/test.dart';
-import 'package:game_2048/bloc/flick_event.dart';
+import 'package:game_2048/bloc/game_event.dart';
 
 void main() {
   test('test caculate result on one row', () {
-    final gamedata = GameData();
+    final gamedata = GameDataCalculator();
 
     expect(gamedata.combineOneRow([2, 2, 4, 2]), [0, 4, 4, 2]);
     expect(gamedata.combineOneRow([0, 0, 0, 2]), [0, 0, 0, 2]);
@@ -14,7 +14,7 @@ void main() {
   });
 
   test('caculate result on table', () {
-    final gamedata = GameData();
+    final gamedata = GameDataCalculator();
 
     expect(
         gamedata.combine([
@@ -32,7 +32,7 @@ void main() {
   });
 
   test('rotate when flick right to left', () {
-    final gameData = GameData();
+    final gameData = GameDataCalculator();
 
     expect(
         gameData.rotateTable([
@@ -64,7 +64,7 @@ void main() {
   });
 
   test('rotate when flick top to bottom', () {
-    final gameData = GameData();
+    final gameData = GameDataCalculator();
 
     expect(
         gameData.rotateTable([
@@ -94,7 +94,7 @@ void main() {
         ]);
   });
   test('rotate when flick bottom to top', () {
-    final gameData = GameData();
+    final gameData = GameDataCalculator();
 
     expect(
         gameData.rotateTable([
@@ -126,7 +126,7 @@ void main() {
   });
 
   test('caculate when flick right to left', () {
-    final gameData = GameData();
+    final gameData = GameDataCalculator();
 
     expect(
         gameData.combine([
@@ -144,7 +144,7 @@ void main() {
   });
 
   test('caculate when flick top to bottom', () {
-    final gameData = GameData();
+    final gameData = GameDataCalculator();
 
     expect(
         gameData.combine([
@@ -162,7 +162,7 @@ void main() {
   });
 
   test('caculate when flick bottom to top', () {
-    final gameData = GameData();
+    final gameData = GameDataCalculator();
 
     expect(
         gameData.combine([
@@ -180,7 +180,7 @@ void main() {
   });
 
   test('game over', () {
-    final gameData = GameData();
+    final gameData = GameDataCalculator();
 
     expect(
         gameData.isGameOver([

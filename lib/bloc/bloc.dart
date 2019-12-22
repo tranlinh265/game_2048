@@ -1,3 +1,3 @@
-export 'flick_bloc.dart';
-export 'flick_event.dart';
-export 'flick_state.dart';
+export 'game_bloc.dart';
+export 'game_event.dart';
+export 'game_state.dart';

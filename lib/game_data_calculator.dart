@@ -1,8 +1,8 @@
 import 'dart:math';
-import 'bloc/flick_event.dart';
+import 'bloc/game_event.dart';
 import 'package:collection/collection.dart';
 
-class GameData {
+class GameDataCalculator {
   static const arraySize = 4;
 
   List<List<int>> combine(List<List<int>> input, Flick flick) {
