@@ -14,10 +14,12 @@ abstract class GameEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FlickRightToLeft extends GameEvent {}
+class FlickRightToLeftEvent extends GameEvent {}
 
-class FlickLeftToRight extends GameEvent {}
+class FlickLeftToRightEvent extends GameEvent {}
 
-class FlickTopToBottm extends GameEvent {}
+class FlickTopToBottmEvent extends GameEvent {}
 
-class FlickBottomToTop extends GameEvent {}
+class FlickBottomToTopEvent extends GameEvent {}
+
+class StartNewGameEvent extends GameEvent{}

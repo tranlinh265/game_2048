@@ -17,3 +17,7 @@ class GameOverState extends GameState {
 class ReadyState extends GameState {
   const ReadyState({@required data}) : super(data: data);
 }
+
+class InitState extends GameState {
+  const InitState({@required data}) : super(data: data);
+}
