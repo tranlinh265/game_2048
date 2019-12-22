@@ -105,46 +105,80 @@ class GameScreen extends StatelessWidget {
                     height: _width,
                     child: BlocBuilder<GameBloc, GameState>(
                       builder: (context, state) {
-                        if (state is ReadyState || state is InitState) {
-                          return GridView.count(
-                            padding: EdgeInsets.all(5.0),
-                            crossAxisCount: 4,
-                            crossAxisSpacing: 5.0,
-                            mainAxisSpacing: 5.0,
-                            primary: false,
-                            // physics: NeverScrollableScrollPhysics(),
-                            children: List.generate(16, (index) {
-                              int value =
-                                  state.data[(index / 4).truncate().toInt()]
-                                      [index % 4];
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  color: value == 0
-                                      ? Colors.black12
-                                      : value == 2
-                                          ? Colors.black38
-                                          : value == 4
-                                              ? Colors.black45
-                                              : value == 8
-                                                  ? Colors.black54
-                                                  : Colors.black87,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    value != 0 ? '$value' : '',
-                                    style: TextStyle(
-                                        fontSize: 30, color: Colors.white),
+                        return Stack(
+                          children: [
+                            GridView.count(
+                              padding: EdgeInsets.all(5.0),
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 5.0,
+                              mainAxisSpacing: 5.0,
+                              primary: false,
+                              // physics: NeverScrollableScrollPhysics(),
+                              children: List.generate(16, (index) {
+                                int value =
+                                    state.data[(index / 4).truncate().toInt()]
+                                        [index % 4];
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    color: value == 0
+                                        ? Colors.black12
+                                        : value == 2
+                                            ? Colors.black38
+                                            : value == 4
+                                                ? Colors.black45
+                                                : value == 8
+                                                    ? Colors.black54
+                                                    : Colors.black87,
                                   ),
-                                ),
-                              );
-                            }),
-                          );
-                        }
-                        if (state is GameOverState) {
-                          return Text("game over");
-                        }
-                        return Text("error");
+                                  child: Center(
+                                    child: Text(
+                                      value != 0 ? '$value' : '',
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                            state is GameOverState
+                                ? Container(
+                                    width: _width,
+                                    height: _width,
+                                    child: Center(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text(
+                                            "Game Over",
+                                            style: TextStyle(
+                                              fontSize: 30,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          FlatButton(
+                                              child: Text(
+                                                "Reset",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                BlocProvider.of<GameBloc>(
+                                                        context)
+                                                    .add(StartNewGameEvent());
+                                              }),
+                                        ],
+                                      ),
+                                    ),
+                                    color: Colors.black12,
+                                  )
+                                : SizedBox(),
+                          ],
+                        );
                       },
                     ),
                   ),
